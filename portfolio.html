@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Sahil — Full Stack MERN Developer. Final-year BSCS student at Iqra University. Experienced in enterprise software, Osquare ERP, Secure SDLC, and high-performance web applications.">
+  <title>Sahil — Full Stack MERN Developer</title>
+
+  <!-- Google Fonts: Syne (Display), DM Sans (Clean Body), JetBrains Mono (Tech) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       CLEAN, HIGH-CONTRAST DESIGN SYSTEM (GOOGLE TECH MINIMALIST)
+       Pure, unified background with high-contrast text and Google Blue accents
+       ========================================================================== */
+    :root, [data-theme="dark"] {
+      --bg: #0b0d13;
+      --bg-surface: #11141e;
+      --card: #151824;
+      --card-hover: #1a1e2d;
+      --fg: #ffffff;
+      --fg-heading: #ffffff;
+      --mut: #94a3b8;
+      --ln: rgba(255, 255, 255, 0.1);
+      --ln-hover: rgba(255, 255, 255, 0.22);
+      
+      /* Vibrant Modern Tech Orange Accents */
+      --accent: #f97316;
+      --accent-hover: #ea580c;
+      --accent-light: #fb923c;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      
+      /* Subtle Clean Orange Gradients */
+      --g: linear-gradient(90deg, #f97316, #fb923c, #f59e0b, #f97316);
+      --g-soft: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+      
+      /* Background Grid Pattern */
+      --grid-dot: rgba(255, 255, 255, 0.08);
+      --glow-top: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(249, 115, 22, 0.18), transparent 70%);
+      
+      --dot-color: #1e2230;
+      color-scheme: dark;
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-surface: #ffffff;
+      --card: #ffffff;
+      --card-hover: #f1f5f9;
+      --fg: #0f172a;
+      --fg-heading: #0f172a;
+      --mut: #64748b;
+      --ln: rgba(0, 0, 0, 0.09);
+      --ln-hover: rgba(0, 0, 0, 0.18);
+      
+      --accent: #f97316;
+      --accent-hover: #ea580c;
+      --accent-light: #fb923c;
+      --accent-emerald: #059669;
+      --accent-amber: #d97706;
+      
+      --g: linear-gradient(90deg, #f97316, #ea580c, #f59e0b, #f97316);
+      --g-soft: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      
+      --grid-dot: rgba(0, 0, 0, 0.06);
+      --glow-top: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(249, 115, 22, 0.10), transparent 70%);
+      
+      --dot-color: #cbd5e1;
+      color-scheme: light;
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px);
+      scroll-behavior: smooth;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font: 400 1.05rem/1.65 'DM Sans', system-ui, sans-serif;
+      overflow-x: hidden;
+      position: relative;
+      background-image: 
+        var(--glow-top),
+        radial-gradient(var(--grid-dot) 1px, transparent 1px);
+      background-size: 100% 100%, 32px 32px;
+      background-repeat: no-repeat, repeat;
+      background-attachment: scroll, fixed;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    h1, h2, h3, .big {
+      font-family: 'Syne', system-ui, sans-serif;
+      color: var(--fg-heading);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    /* Clean Gradient Text Animation */
+    .gt {
+      background: var(--g);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: fl 7s linear infinite;
+    }
+
+    @keyframes fl {
+      to { background-position: 300% 0; }
+    }
+
+    /* Preloader */
+    #pre {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    #pn {
+      font: 800 clamp(4rem, 15vw, 9rem)/1 'Syne', sans-serif;
+      color: var(--fg-heading);
+      letter-spacing: -0.04em;
+    }
+
+    #pb {
+      width: min(70vw, 360px);
+      height: 4px;
+      background: var(--ln);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    #pb i {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--g-soft);
+      box-shadow: 0 0 12px rgba(249, 115, 22, 0.6);
+    }
+
+    .pre-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--mut);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* Custom Cursor (Difference blend) */
+    #cur {
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 999;
+      pointer-events: none;
+      mix-blend-mode: difference;
+    }
+
+    #cur i {
+      display: block;
+      width: 18px;
+      height: 18px;
+      margin: -9px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    #cur.h i {
+      transform: scale(3.2);
+    }
+
+    @media (hover: none) {
+      #cur { display: none; }
+    }
+
+    /* Top Reading Progress Bar */
+    #bar {
+      position: fixed;
+      top: env(safe-area-inset-top, 0px);
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+      z-index: 600;
+    }
+
+    /* Navigation Bar */
+    nav {
+      position: fixed;
+      top: env(safe-area-inset-top, 0px);
+      left: 0;
+      width: 100%;
+      padding: 14px 7vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 500;
+      font-size: 0.95rem;
+      background: rgba(11, 13, 19, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--ln);
+      transition: background-color 0.4s;
+    }
+
+    [data-theme="light"] nav {
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .nav-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--fg-heading);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-brand-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .nav-items {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .nav-items a {
+      color: var(--mut);
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+
+    .nav-items a:hover {
+      color: var(--fg);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-toggle-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--ln);
+      background: var(--card);
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.25s;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: rotate(15deg);
+    }
+
+    .nav-btn {
+      padding: 7px 18px;
+      border: 1px solid var(--accent);
+      border-radius: 99px;
+      background: var(--accent);
+      color: #ffffff !important;
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s;
+      box-shadow: 0 2px 12px rgba(249, 115, 22, 0.4);
+    }
+
+    .nav-btn:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Sections */
+    section, .hero {
+      padding: 13vh 7vw;
+      position: relative;
+    }
+
+    h2 {
+      font-size: clamp(2.2rem, 6.5vw, 4.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 2.2rem;
+    }
+
+    .sec-sub {
+      color: var(--mut);
+      font-size: 1.1rem;
+      max-width: 38rem;
+      margin-top: -1.2rem;
+      margin-bottom: 2.8rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      padding-top: 14vh;
+    }
+
+    /* Interactive Dot Grid (Anime.js Ripple) */
+    #grid {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(var(--cols), 1fr);
+      z-index: 0;
+      cursor: crosshair;
+    }
+
+    #grid i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--dot-color);
+      place-self: center;
+      transition: background-color 0.4s;
+    }
+
+    .hin {
+      position: relative;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    #name {
+      font-size: clamp(3.8rem, 11vw, 8.8rem);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 0.95;
+      display: flex;
+      overflow: hidden;
+      padding: 0 0 0.08em;
+      user-select: none;
+      margin-bottom: 0.5rem;
+    }
+
+    #name span {
+      display: inline-block;
+      pointer-events: auto;
+      cursor: pointer;
+      color: var(--fg-heading);
+      will-change: transform;
+    }
+
+    .role {
+      font-size: clamp(1.3rem, 3.2vw, 2.4rem);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      margin-top: 1.2rem;
+      color: var(--fg-heading);
+    }
+
+    .caret {
+      display: inline-block;
+      width: 3px;
+      height: 1em;
+      background: var(--accent);
+      margin-left: 4px;
+      vertical-align: -0.1em;
+      animation: bl 1s steps(1) infinite;
+    }
+
+    @keyframes bl {
+      50% { opacity: 0; }
+    }
+
+    .hero-summary {
+      max-width: 44rem;
+      color: var(--mut);
+      font-size: 1.1rem;
+      margin-top: 1.2rem;
+      line-height: 1.65;
+      pointer-events: auto;
+    }
+
+    .hero-summary strong {
+      color: var(--fg);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 2rem;
+      color: var(--mut);
+      pointer-events: auto;
+    }
+
+    .tags span {
+      border: 1px solid var(--ln);
+      border-radius: 99px;
+      padding: 6px 16px;
+      font-size: 0.9rem;
+      background: var(--card);
+      color: var(--fg);
+      font-weight: 500;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .hero-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 2.5rem;
+      pointer-events: auto;
+    }
+
+    .btn-main {
+      padding: 13px 30px;
+      border-radius: 99px;
+      background: var(--accent);
+      color: #ffffff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.98rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s;
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.4);
+    }
+
+    .btn-main:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(249, 115, 22, 0.55);
+    }
+
+    .btn-ghost {
+      padding: 13px 26px;
+      border-radius: 99px;
+      border: 1px solid var(--ln);
+      background: var(--card);
+      color: var(--fg);
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--ln-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Infinite Marquee Ticker */
+    .tick {
+      overflow: hidden;
+      border-block: 1px solid var(--ln);
+      padding: 18px 0;
+      background: var(--bg-surface);
+    }
+
+    .tk {
+      display: flex;
+      gap: 3.5rem;
+      width: max-content;
+      font: 800 clamp(1.8rem, 5vw, 3.6rem)/1 'Syne', sans-serif;
+      animation: mq 24s linear infinite;
+    }
+
+    @keyframes mq {
+      to { transform: translateX(-50%); }
+    }
+
+    /* About Section & Floating Shapes */
+    .about p {
+      font: 700 clamp(1.4rem, 3.5vw, 2.7rem)/1.35 'Syne', sans-serif;
+      max-width: 27em;
+      letter-spacing: -0.02em;
+      color: var(--fg-heading);
+    }
+
+    .w {
+      opacity: 0.14;
+      transition: opacity 0.3s;
+    }
+
+    .sh {
+      position: absolute;
+      width: 65px;
+      height: 65px;
+      right: 10vw;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .s1 {
+      top: 12vh;
+      border: 5px solid var(--accent);
+      border-radius: 50%;
+    }
+
+    .s2 {
+      top: 42vh;
+      right: 22vw;
+      border: 5px solid var(--accent-light);
+      border-radius: 12px;
+    }
+
+    .s3 {
+      top: 70vh;
+      width: 0;
+      height: 0;
+      border: 35px solid transparent;
+      border-bottom: 60px solid var(--accent-emerald);
+    }
+
+    /* Horizontal Pinned Track: Experience */
+    .hz {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .hzi {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hz h2 {
+      padding: 0 7vw;
+      margin-bottom: 2rem;
+    }
+
+    .track {
+      display: flex;
+      gap: 3.5vw;
+      padding: 0 7vw;
+      width: max-content;
+    }
+
+    .card {
+      width: min(85vw, 640px);
+      background: var(--card);
+      border: 1px solid var(--ln);
+      border-radius: 20px;
+      padding: clamp(24px, 3.5vw, 42px);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, background-color 0.3s;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .card::before, .pj::before, .edu-box::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .card:hover, .pj:hover, .edu-box:hover {
+      border-color: var(--ln-hover);
+      background: var(--card-hover);
+    }
+
+    .card h3 {
+      font-size: 1.85rem;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--fg-heading);
+    }
+
+    .role-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+
+    .when {
+      color: var(--accent-amber);
+      font-weight: 600;
+      margin: 0.6rem 0 1.2rem;
+      font-size: 0.95rem;
+    }
+
+    .card ul, .pj ul {
+      padding-left: 1.2rem;
+      color: var(--mut);
+    }
+
+    li {
+      margin-bottom: 0.65rem;
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    li strong {
+      color: var(--fg);
+    }
+
+    #hb {
+      height: 4px;
+      margin: 2.5rem 7vw 0;
+      background: var(--ln);
+      border-radius: 9px;
+      overflow: hidden;
+    }
+
+    #hb i {
+      display: block;
+      height: 100%;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: 0;
+    }
+
+    /* Stacked Sticky Projects Section */
+    .proj {
+      display: grid;
+      gap: 6vh;
+    }
+
+    .pj {
+      position: sticky;
+      top: 10vh;
+      background: var(--card);
+      border: 1px solid var(--ln);
+      border-radius: 24px;
+      padding: clamp(24px, 4vw, 54px);
+      min-height: 52vh;
+      overflow: hidden;
+      transition: border-color 0.3s;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+    }
+
+    .pj-header-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .pj h3 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: var(--fg-heading);
+    }
+
+    .pj-sub {
+      color: var(--fg);
+      font-size: 1.05rem;
+      margin: 0.5rem 0 1.2rem;
+      font-weight: 500;
+    }
+
+    .tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 1.2rem 0 1.8rem;
+    }
+
+    .tech span, .chips span {
+      border: 1px solid var(--ln);
+      border-radius: 99px;
+      padding: 5px 14px;
+      font-size: 0.88rem;
+      background: var(--bg-surface);
+      color: var(--fg);
+      font-weight: 500;
+    }
+
+    .js .tech span, .js .chips span {
+      opacity: 0;
+    }
+
+    /* Education & Certifications Section (From CV) */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    .edu-box {
+      background: var(--card);
+      border: 1px solid var(--ln);
+      border-radius: 20px;
+      padding: clamp(24px, 3.5vw, 40px);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    .edu-inst {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--fg-heading);
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-deg {
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .edu-desc {
+      color: var(--mut);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    .edu-desc strong {
+      color: var(--fg);
+    }
+
+    /* Skills Chips Section */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      max-width: 62em;
+    }
+
+    .chips span {
+      font: 700 clamp(1rem, 2.2vw, 1.45rem) 'Syne', sans-serif;
+      padding: 10px 22px;
+      border-width: 1px;
+      border-color: var(--ln);
+      transition: all 0.25s;
+      background: var(--card);
+    }
+
+    .chips span:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    /* Numbers & Key Achievements Section */
+    .nums {
+      position: relative;
+    }
+
+    .ln {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 5vh;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 3vw;
+    }
+
+    .stats strong {
+      display: block;
+      font: 800 clamp(3.5rem, 9vw, 7rem)/1 'Syne', sans-serif;
+      letter-spacing: -0.05em;
+    }
+
+    .stats span {
+      color: var(--mut);
+      font-size: 1.05rem;
+    }
+
+    .achv {
+      margin-top: 6vh;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .achv-item {
+      background: var(--card);
+      border: 1px solid var(--ln);
+      border-radius: 18px;
+      padding: 22px 24px;
+      color: var(--mut);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    .achv-item strong {
+      color: var(--fg);
+    }
+
+    /* Contact Section */
+    .contact {
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .big {
+      font-size: clamp(2.6rem, 9.5vw, 8.2rem);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 0.95;
+      clip-path: inset(0 100% 0 0);
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-top: 2.5rem;
+    }
+
+    .m {
+      padding: 16px 36px;
+      border-radius: 99px;
+      background: var(--accent);
+      color: #ffffff;
+      font: 700 clamp(1rem, 2.2vw, 1.35rem) 'Syne', sans-serif;
+      text-decoration: none;
+      word-break: break-all;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: background-color 0.25s, transform 0.25s;
+      box-shadow: 0 4px 16px rgba(249, 115, 22, 0.4);
+    }
+
+    .m:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(249, 115, 22, 0.55);
+    }
+
+    .resume-dl {
+      padding: 16px 32px;
+      border-radius: 99px;
+      border: 1px solid var(--ln);
+      background: var(--card);
+      color: var(--fg);
+      font: 700 clamp(1rem, 2.2vw, 1.35rem) 'Syne', sans-serif;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s;
+    }
+
+    .resume-dl:hover {
+      border-color: var(--ln-hover);
+      transform: translateY(-2px);
+    }
+
+    .links {
+      margin-top: 2rem;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      color: var(--mut);
+      font-size: 1.05rem;
+    }
+
+    .links a:hover {
+      color: var(--accent);
+    }
+
+    /* Confetti Particle */
+    .pt {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    footer {
+      padding: 4vh 7vw;
+      color: var(--mut);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--ln);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      background: var(--bg-surface);
+    }
+
+    @media (max-width: 768px) {
+      .nav-items a:not(.nav-btn) { display: none; }
+      section, .hero { padding: 12vh 6vw; }
+      footer { flex-direction: column; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .w { opacity: 1 !important; }
+      .big { clip-path: none !important; }
+      .tk, .gt, .caret, .m, .card::before, .pj::before, .edu-box::before { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Root container for React application -->
+  <div id="root"></div>
+
+  <!-- CDN Dependencies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.10/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+
+  <!-- React Application with Babel Standalone -->
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    // Vibrant Tech Orange Accents
+    const ORANGE_PALETTE = ['#f97316', '#fb923c', '#ea580c', '#f59e0b', '#fdba74'];
+
+    /* ==========================================================================
+       1. PRELOADER COMPONENT
+       Smooth 0 to 100 counter and wipe-up transition
+       ========================================================================== */
+    function Preloader({ onComplete }) {
+      const [count, setCount] = useState(0);
+
+      useEffect(() => {
+        const o = { n: 0 };
+        anime({
+          targets: o,
+          n: 100,
+          round: 1,
+          duration: 1800,
+          easing: 'easeInOutQuart',
+          update: () => setCount(o.n),
+          complete: () => {
+            gsap.to('#pre', {
+              yPercent: -100,
+              duration: 0.85,
+              ease: 'power4.inOut',
+              onComplete: () => {
+                const el = document.getElementById('pre');
+                if (el) el.style.display = 'none';
+                onComplete && onComplete();
+              }
+            });
+          }
+        });
+      }, []);
+
+      return (
+        <div id="pre">
+          <div className="pre-sub">PORTFOLIO ARCHITECTURE</div>
+          <div id="pn">{count}</div>
+          <div id="pb">
+            <i style={{ width: `${count}%` }}></i>
+          </div>
+        </div>
+      );
+    }
+
+    /* ==========================================================================
+       2. CUSTOM CURSOR COMPONENT (Difference blend mode)
+       ========================================================================== */
+    function CustomCursor() {
+      const curRef = useRef(null);
+
+      useEffect(() => {
+        if (!curRef.current || window.matchMedia('(hover: none)').matches) return;
+        const cur = curRef.current;
+        const qx = gsap.quickTo(cur, 'x', { duration: 0.22 });
+        const qy = gsap.quickTo(cur, 'y', { duration: 0.22 });
+
+        const handleMove = (e) => {
+          qx(e.clientX);
+          qy(e.clientY);
+        };
+        window.addEventListener('mousemove', handleMove);
+
+        const handleEnter = () => cur.classList.add('h');
+        const handleLeave = () => cur.classList.remove('h');
+
+        const targets = document.querySelectorAll('a, button, .tilt, #name span, .m, .resume-dl, .chips span');
+        targets.forEach(el => {
+          el.addEventListener('mouseenter', handleEnter);
+          el.addEventListener('mouseleave', handleLeave);
+        });
+
+        return () => {
+          window.removeEventListener('mousemove', handleMove);
+        };
+      }, []);
+
+      return (
+        <div id="cur" ref={curRef}>
+          <i></i>
+        </div>
+      );
+    }
+
+    /* ==========================================================================
+       3. NAVBAR COMPONENT (With Theme Toggle: Dark / Light Mode)
+       ========================================================================== */
+    function Navbar({ theme, toggleTheme }) {
+      return (
+        <nav>
+          <a href="#hero" className="nav-brand">
+            <span className="nav-brand-dot"></span>
+            <span>Sahil</span>
+          </a>
+          <div className="nav-items">
+            <a href="#about">About</a>
+            <a href="#work">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#numbers">Impact</a>
+            <a href="#contact">Contact</a>
+
+            <div className="nav-actions">
+              <button 
+                className="theme-toggle-btn" 
+                onClick={toggleTheme} 
+                title="Toggle Clean Light / Dark Theme"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? '☀️' : '🌙'}
+              </button>
+
+              <a href="Sahil_Resume.pdf" download="Sahil_Resume.pdf" className="nav-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>CV</span>
+              </a>
+            </div>
+          </div>
+        </nav>
+      );
+    }
+
+    /* ==========================================================================
+       4. HERO SECTION (Dot Grid with Anime Ripple & Elastic Letter Bounce)
+       ========================================================================== */
+    function Hero({ isReady }) {
+      const gridRef = useRef(null);
+      const [typeText, setTypeText] = useState('');
+      const roles = [
+        'MERN applications',
+        'enterprise ERP systems',
+        'secure banking APIs',
+        'interactive interfaces'
+      ];
+
+      // Dot Grid with Anime.js ripple
+      useEffect(() => {
+        const g = gridRef.current;
+        if (!g) return;
+        const cols = Math.ceil(window.innerWidth / 44);
+        const rows = Math.ceil(g.parentElement.offsetHeight / 44);
+        g.style.setProperty('--cols', cols);
+        g.innerHTML = '';
+
+        for (let i = 0; i < cols * rows; i++) {
+          g.appendChild(document.createElement('i'));
+        }
+
+        function ripple(from) {
+          anime({
+            targets: '#grid i',
+            scale: [
+              { value: 2.8, duration: 250, easing: 'easeOutSine' },
+              { value: 1, duration: 600, easing: 'easeInOutQuad' }
+            ],
+            backgroundColor: [
+              { value: (e, k) => ORANGE_PALETTE[k % ORANGE_PALETTE.length], duration: 250 },
+              { value: 'var(--dot-color)', duration: 600 }
+            ],
+            delay: anime.stagger(35, { grid: [cols, rows], from: from })
+          });
+        }
+
+        const handleClick = (e) => {
+          const dots = Array.from(g.querySelectorAll('i'));
+          const k = dots.indexOf(e.target);
+          if (k > -1) ripple(k);
+        };
+        g.addEventListener('click', handleClick);
+
+        const interval = setInterval(() => {
+          ripple(Math.floor(Math.random() * (cols * rows)));
+        }, 4500);
+
+        return () => {
+          g.removeEventListener('click', handleClick);
+          clearInterval(interval);
+        };
+      }, []);
+
+      // Dynamic Typewriter
+      useEffect(() => {
+        let ri = 0, ci = 0, del = false;
+        let timer;
+        function tick() {
+          const w = roles[ri];
+          ci += del ? -1 : 1;
+          setTypeText(w.slice(0, ci));
+          let d = del ? 35 : 75;
+          if (!del && ci === w.length) {
+            del = true;
+            d = 1600;
+          } else if (del && ci === 0) {
+            del = false;
+            ri = (ri + 1) % roles.length;
+            d = 300;
+          }
+          timer = setTimeout(tick, d);
+        }
+        tick();
+        return () => clearTimeout(timer);
+      }, []);
+
+      // Letters elastic bounce on hover
+      const handleLetterEnter = (e, index) => {
+        const el = e.currentTarget;
+        el.style.color = ORANGE_PALETTE[index % ORANGE_PALETTE.length];
+        anime({
+          targets: el,
+          translateY: [0, -26, 0],
+          rotate: [0, index % 2 ? -8 : 8, 0],
+          duration: 700,
+          easing: 'easeOutElastic(1, .5)',
+          complete: () => {
+            el.style.color = '';
+          }
+        });
+      };
+
+      // Entrance animation after preloader
+      useEffect(() => {
+        if (!isReady) return;
+        anime.timeline()
+          .add({
+            targets: '#name span',
+            translateY: ['110%', 0],
+            rotate: [12, 0],
+            delay: anime.stagger(80),
+            duration: 900,
+            easing: 'easeOutExpo'
+          })
+          .add({
+            targets: '.role, .hero-summary, .tags span, .hero-btns',
+            opacity: [0, 1],
+            translateY: [18, 0],
+            delay: anime.stagger(65),
+            easing: 'easeOutQuad'
+          }, '-=450');
+      }, [isReady]);
+
+      return (
+        <header className="hero" id="hero">
+          <div id="grid" ref={gridRef} aria-hidden="true"></div>
+
+          <div className="hin">
+            <h1 id="name" aria-label="Sahil">
+              {'SAHIL'.split('').map((char, i) => (
+                <span
+                  key={i}
+                  onMouseEnter={(e) => handleLetterEnter(e, i)}
+                >
+                  {char}
+                </span>
+              ))}
+            </h1>
+
+            <p className="role">
+              I build <span className="gt">{typeText}</span>
+              <i className="caret"></i>
+            </p>
+
+            <p className="hero-summary">
+              Final-year <strong>BS Computer Science</strong> student at Iqra University &amp; Full Stack Developer.
+              Contributing to enterprise accounting software integrated with <strong>Osquare ERP</strong> (used by <strong>Aptech Pakistan</strong>),
+              and developing banking-grade <strong>Secure SDLC</strong> platforms.
+            </p>
+
+            <div className="tags">
+              <span>📍 Karachi, Pakistan</span>
+              <span>⚡ 2+ years experience</span>
+              <span>🏢 Osquare ERP</span>
+              <span>🎓 Iqra University BSCS</span>
+              <span>📜 NAVTTC Certified</span>
+            </div>
+
+            <div className="hero-btns">
+              <a href="#projects" className="btn-main">
+                Explore Projects →
+              </a>
+              <a href="Sahil_Resume.pdf" download="Sahil_Resume.pdf" className="btn-ghost">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download CV (PDF)
+              </a>
+              <a href="#contact" className="btn-ghost">
+                Contact Me
+              </a>
+            </div>
+          </div>
+        </header>
+      );
+    }
+
+    /* ==========================================================================
+       5. INFINITE TICKER MARQUEE
+       ========================================================================== */
+    function Ticker() {
+      return (
+        <div className="tick" aria-hidden="true">
+          <div className="tk">
+            <span className="gt">React.js</span>
+            <span>Next.js</span>
+            <span className="gt">Node.js</span>
+            <span>Express.js</span>
+            <span className="gt">MongoDB</span>
+            <span>Redis</span>
+            <span className="gt">Angular</span>
+            <span>Osquare ERP</span>
+            <span className="gt">Secure SDLC</span>
+            <span>GSAP</span>
+            {/* Seamless loop duplicate */}
+            <span className="gt">React.js</span>
+            <span>Next.js</span>
+            <span className="gt">Node.js</span>
+            <span>Express.js</span>
+            <span className="gt">MongoDB</span>
+            <span>Redis</span>
+            <span className="gt">Angular</span>
+            <span>Osquare ERP</span>
+            <span className="gt">Secure SDLC</span>
+            <span>GSAP</span>
+          </div>
+        </div>
+      );
+    }
+
+    /* ==========================================================================
+       6. ABOUT SECTION (Word-by-word reveal & Floating Geometric Shapes)
+       ========================================================================== */
+    function About() {
+      const textRef = useRef(null);
+
+      useEffect(() => {
+        const el = textRef.current;
+        if (!el || !window.gsap || !window.ScrollTrigger) return;
+
+        const raw = el.textContent;
+        el.innerHTML = raw.split(' ').map(w => `<span class="w">${w}</span>`).join(' ');
+
+        gsap.to(el.querySelectorAll('.w'), {
+          opacity: 1,
+          stagger: 0.1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#about',
+            start: 'top 70%',
+            end: 'bottom 55%',
+            scrub: true
+          }
+        });
+
+        // Floating geometric shapes
+        anime({
+          targets: '.sh',
+          rotate: '1turn',
+          translateY: [-20, 20],
+          direction: 'alternate',
+          duration: (e, i) => 3000 + i * 1200,
+          loop: true,
+          easing: 'easeInOutSine'
+        });
+
+        gsap.to('.sh', {
+          y: (i) => -120 * (i + 1),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#about',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      }, []);
+
+      return (
+        <section className="about" id="about">
+          <div className="sh s1"></div>
+          <div className="sh s2"></div>
+          <div className="sh s3"></div>
+          <p ref={textRef}>
+            Final-year BS Computer Science student at Iqra University and full stack developer with over two years of hands-on experience. I build production web applications, including enterprise accounting software integrated with Osquare ERP used by Aptech Pakistan, and freelance client deployments. I specialize in MERN stack development, secure banking SDLC workflows, cryptographic hash-chain audit logging, and high-performance interfaces that move with fluidity.
+          </p>
+        </section>
+      );
+    }
+
+    /* ==========================================================================
+       7. WORK EXPERIENCE SECTION (Horizontal Pinned Scroll Track)
+       With 3D Card Tilt & Detailed CV Points
+       ========================================================================== */
+    function Experience() {
+      const trackRef = useRef(null);
+
+      useEffect(() => {
+        const tr = trackRef.current;
+        if (!tr || !window.gsap || !window.ScrollTrigger) return;
+
+        gsap.to(tr, {
+          x: () => -(tr.scrollWidth - window.innerWidth + window.innerWidth * 0.07),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.hz',
+            start: 'top top',
+            end: () => '+=' + tr.scrollWidth,
+            pin: true,
+            scrub: 1,
+            invalidateOnRefresh: true,
+            onUpdate: (s) => {
+              gsap.set('#hb i', { scaleX: s.progress });
+            }
+          }
+        });
+      }, []);
+
+      return (
+        <section className="hz" id="work">
+          <div className="hzi">
+            <h2>Experience</h2>
+            <div className="track" ref={trackRef}>
+              
+              {/* 1. Innovador Solutions */}
+              <article className="card tilt">
+                <h3>Innovador Solutions</h3>
+                <div className="role-badge">MERN STACK DEVELOPER</div>
+                <p className="when">May 2025 – Present (Current Enterprise Role)</p>
+                <ul>
+                  <li>Developing enterprise-level accounting software integrated with <strong>Osquare ERP</strong>, actively used by <strong>Aptech Pakistan</strong>.</li>
+                  <li>Building financial modules, transaction tracking systems, reporting dashboards, and user management.</li>
+                  <li>Designing and integrating <strong>RESTful APIs</strong> to enable seamless frontend-backend communication.</li>
+                  <li>Developing Angular-based modules and backend utilities to improve performance and maintainability.</li>
+                  <li>Troubleshooting production issues, optimizing complex queries, and enhancing throughput.</li>
+                  <li>Collaborating with cross-functional engineering teams using Agile workflows.</li>
+                </ul>
+              </article>
+
+              {/* 2. Xgen Technology */}
+              <article className="card tilt">
+                <h3>Xgen Technology – Karachi</h3>
+                <div className="role-badge">MERN STACK DEVELOPER INTERN</div>
+                <p className="when">August 2024 – November 2024</p>
+                <ul>
+                  <li>Designed and developed a comprehensive <strong>Learning Management System (LMS)</strong> using the MERN stack.</li>
+                  <li>Implemented user authentication (JWT), course management, attendance tracking, and student progress monitoring.</li>
+                  <li>Developed analytical reporting dashboards with <strong>CSV export functionality</strong> for administrators.</li>
+                  <li>Integrated React frontend components with Node.js and Express.js REST APIs.</li>
+                  <li>Participated in testing, debugging, and performance optimization to maximize system stability.</li>
+                  <li>Collaborated closely with team members using Agile sprints to deliver milestones.</li>
+                </ul>
+              </article>
+
+              {/* 3. Freelance Web Developer */}
+              <article className="card tilt">
+                <h3>Freelance Web Developer</h3>
+                <div className="role-badge">FULL STACK &amp; MOTION ARCHITECT</div>
+                <p className="when">January 2023 – Present</p>
+                <ul>
+                  <li>Architected immersive, high-performance web interfaces utilizing <strong>GSAP (GreenSock)</strong> for animation timelines and scroll-triggered interactions.</li>
+                  <li>Engineered responsive and scalable front-end architecture using Bootstrap and custom CSS3 for universal compatibility.</li>
+                  <li>Optimized visual performance via DOM manipulations in Vanilla JavaScript, enhancing client retention.</li>
+                  <li>Successfully delivered and deployed the <strong>iBusiness application</strong>, currently in production use by the client.</li>
+                  <li>Managed the complete SDLC from requirement gathering and UI/UX wireframes to deployment.</li>
+                </ul>
+              </article>
+
+            </div>
+            <div id="hb"><i></i></div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ==========================================================================
+       8. FEATURED PROJECTS SECTION (Sticky Stacked Cards)
+       Incorporating SecureFlow (FYP), iBusiness, Osquare ERP, and LMS from CV
+       ========================================================================== */
+    function Projects() {
+      useEffect(() => {
+        const cards = document.querySelectorAll('.pj');
+        if (!cards.length || !window.gsap || !window.ScrollTrigger) return;
+
+        cards.forEach((p, i, a) => {
+          if (i < a.length - 1) {
+            gsap.to(p, {
+              scale: 0.94,
+              opacity: 0.65,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: a[i + 1],
+                start: 'top 85%',
+                end: 'top 15%',
+                scrub: true
+              }
+            });
+          }
+
+          ScrollTrigger.create({
+            trigger: p,
+            start: 'top 75%',
+            once: true,
+            onEnter: () => {
+              anime({
+                targets: p.querySelectorAll('.tech span'),
+                translateY: [20, 0],
+                scale: [0.6, 1],
+                opacity: [0, 1],
+                delay: anime.stagger(55),
+                easing: 'easeOutBack'
+              });
+            }
+          });
+        });
+      }, []);
+
+      return (
+        <section id="projects">
+          <h2>Projects</h2>
+          <div className="proj">
+
+            {/* 1. SecureFlow (Final Year Project) */}
+            <article className="pj tilt">
+              <div className="pj-header-tag">🛡️ FINAL YEAR CAPSTONE PROJECT</div>
+              <h3>SecureFlow</h3>
+              <p className="pj-sub">Banking-Focused Project Management Platform Enforcing Secure SDLC</p>
+              
+              <div className="tech">
+                <span>React.js</span>
+                <span>Node.js</span>
+                <span>Express.js</span>
+                <span>MongoDB</span>
+                <span>Redis</span>
+                <span>JWT</span>
+                <span>Socket.io</span>
+                <span>Postman</span>
+              </div>
+
+              <ul>
+                <li>Designed and developed a secure project management platform enforcing <strong>Secure SDLC</strong> workflows for sensitive banking environments.</li>
+                <li>Implemented <strong>Role-Based Access Control (RBAC)</strong> to manage granular access permissions across multiple user roles.</li>
+                <li>Developed a <strong>tamper-proof cryptographic hash-chain audit logging system</strong> to ensure log integrity and non-repudiation.</li>
+                <li>Integrated <strong>Redis-based session management and rate limiting</strong> to strengthen application endpoint security.</li>
+                <li>Built a rule-based intrusion detection module for identifying suspicious activities and generating instant security alerts.</li>
+                <li>Developed an admin operations dashboard for real-time monitoring of system activities, compliance reports, and security events.</li>
+                <li>Applied secure API development practices and automated validation mechanisms throughout the lifecycle.</li>
+              </ul>
+            </article>
+
+            {/* 2. iBusiness Application */}
+            <article className="pj tilt">
+              <div className="pj-header-tag">💼 PRODUCTION CLIENT DEPLOYMENT</div>
+              <h3>iBusiness Application</h3>
+              <p className="pj-sub">Interactive High-Performance MERN Business Web App</p>
+
+              <div className="tech">
+                <span>MERN Stack</span>
+                <span>GSAP Timelines</span>
+                <span>Bootstrap</span>
+                <span>Vanilla JS</span>
+                <span>Mobile-First CSS3</span>
+              </div>
+
+              <ul>
+                <li>Successfully delivered and deployed for an active business client, currently running in active production.</li>
+                <li>Architected scroll-triggered <strong>GSAP animation timelines</strong> and dynamic visual sequences.</li>
+                <li>Optimized visual performance and DOM operations with Vanilla JavaScript, drastically reducing load times.</li>
+                <li>Oversaw the full cycle from UI/UX wireframing to client hand-off and server deployment.</li>
+              </ul>
+            </article>
+
+            {/* 3. Osquare ERP Accounting Software */}
+            <article className="pj tilt">
+              <div className="pj-header-tag">📊 ENTERPRISE INTEGRATION</div>
+              <h3>Osquare ERP Accounting Platform</h3>
+              <p className="pj-sub">Enterprise Accounting Engine Powering Aptech Pakistan Operations</p>
+
+              <div className="tech">
+                <span>Node.js</span>
+                <span>Express.js</span>
+                <span>Angular Modules</span>
+                <span>Osquare ERP</span>
+                <span>RESTful APIs</span>
+              </div>
+
+              <ul>
+                <li>Actively contributing to enterprise accounting software integrated with <strong>Osquare ERP</strong>, utilized by <strong>Aptech Pakistan</strong>.</li>
+                <li>Engineered financial transaction tracking, accounting ledgers, and reporting modules.</li>
+                <li>Designed robust RESTful APIs ensuring low latency between Angular frontend and Node.js backend.</li>
+                <li>Implemented query tuning and performance optimizations for daily enterprise operations.</li>
+              </ul>
+            </article>
+
+            {/* 4. Learning Management System */}
+            <article className="pj tilt">
+              <div className="pj-header-tag">🎓 ACADEMIC PORTAL</div>
+              <h3>MERN Learning Management System</h3>
+              <p className="pj-sub">Comprehensive LMS with Course Analytics &amp; CSV Export</p>
+
+              <div className="tech">
+                <span>React.js</span>
+                <span>Node.js</span>
+                <span>Express.js</span>
+                <span>MongoDB</span>
+                <span>CSV Engine</span>
+              </div>
+
+              <ul>
+                <li>Complete institutional LMS featuring secure user authentication and course lifecycle management.</li>
+                <li>Automated student attendance tracking and interactive progress monitoring dashboards.</li>
+                <li>Custom CSV export engine for administrative reporting and student records.</li>
+              </ul>
+            </article>
+
+          </div>
+        </section>
+      );
+    }
+
+    /* ==========================================================================
+       9. EDUCATION & CERTIFICATIONS SECTION (NEW - From CV)
+       ========================================================================== */
+    function Education() {
+      return (
+        <section id="education">
+          <h2>Education &amp; Credentials</h2>
+          <p className="sec-sub">Formal academic foundation in Computer Science paired with technical certifications.</p>
+
+          <div className="edu-grid">
+            {/* Iqra University */}
+            <div className="edu-box tilt">
+              <div className="role-badge">🎓 UNIVERSITY DEGREE</div>
+              <h3 className="edu-inst">Iqra University</h3>
+              <div className="edu-deg">Bachelor of Science in Computer Science (BSCS)</div>
+              <p className="edu-desc">
+                <strong>Final-year Student.</strong> Key coursework includes Object-Oriented Programming (OOP), Data Structures &amp; Algorithms (DSA), Relational Database Management Systems (MySQL), Web Engineering, Information Security, and Software Architecture.
+              </p>
+            </div>
+
+            {/* NAVTTC Certificate */}
+            <div className="edu-box tilt">
+              <div className="role-badge">📜 ACCREDITED CERTIFICATION</div>
+              <h3 className="edu-inst">NAVTTC</h3>
+              <div className="edu-deg">Full Stack Web Development Course (Certificate) – 2025</div>
+              <p className="edu-desc">
+                <strong>National Vocational and Technical Training Commission (NAVTTC).</strong> Accredited professional training in full-stack architecture, modern JavaScript frameworks, API development, database design, and cloud deployment standards.
+              </p>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ==========================================================================
+       10. SKILLS SECTION (Pop-in elastic bounce & subtle float)
+       ========================================================================== */
+    function Skills() {
+      const skills = [
+        'HTML', 'CSS', 'JavaScript', 'React', 'Next.js', 'Angular',
+        'Tailwind', 'Bootstrap', 'Node.js', 'Express.js', 'MongoDB',
+        'MySQL', 'Redis', 'JWT', 'Socket.io', 'OOP', 'DSA', 'GSAP',
+        'REST APIs', 'Secure SDLC', 'Postman', 'Git & GitHub', 'AI Developer Tools'
+      ];
+
+      useEffect(() => {
+        const chips = document.querySelectorAll('#chips span');
+        if (!chips.length || !window.anime || !window.ScrollTrigger) return;
+
+        ScrollTrigger.create({
+          trigger: '#chips',
+          start: 'top 80%',
+          once: true,
+          onEnter: () => {
+            anime({
+              targets: chips,
+              scale: [0, 1],
+              opacity: [0, 1],
+              rotate: [-120, 0],
+              delay: anime.stagger(65, { from: 'center' }),
+              easing: 'easeOutElastic(1, .6)',
+              complete: () => {
+                anime({
+                  targets: chips,
+                  translateY: () => anime.random(-8, 8),
+                  direction: 'alternate',
+                  loop: true,
+                  duration: () => anime.random(1800, 2600),
+                  easing: 'easeInOutSine'
+                });
+              }
+            });
+          }
+        });
+      }, []);
+
+      return (
+        <section id="skills">
+          <h2>Skills</h2>
+          <p className="sec-sub">Technologies, languages, and tools actively deployed in my production stack.</p>
+          <div className="chips" id="chips">
+            {skills.map((s, idx) => (
+              <span key={idx}>{s}</span>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    /* ==========================================================================
+       11. IMPACT & KEY ACHIEVEMENTS (SVG path drawing & live counters)
+       ========================================================================== */
+    function Impact() {
+      const pathRef = useRef(null);
+
+      useEffect(() => {
+        const lp = pathRef.current;
+        if (!lp || !window.gsap || !window.ScrollTrigger) return;
+
+        const L = lp.getTotalLength();
+        gsap.fromTo(lp, 
+          { strokeDasharray: L, strokeDashoffset: L },
+          {
+            strokeDashoffset: 0,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.nums',
+              start: 'top 80%',
+              end: 'top 20%',
+              scrub: true
+            }
+          }
+        );
+
+        const counters = document.querySelectorAll('[data-n]');
+        counters.forEach(e => {
+          const c = { v: 0 };
+          gsap.to(c, {
+            v: +e.dataset.n,
+            duration: 1.8,
+            ease: 'power2.out',
+            onUpdate: () => {
+              e.textContent = Math.round(c.v) + (e.dataset.n === '100' ? '%' : '');
+            },
+            scrollTrigger: {
+              trigger: e,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        });
+      }, []);
+
+      return (
+        <section className="nums" id="numbers">
+          <h2>Quantifiable Impact</h2>
+
+          <svg className="ln" viewBox="0 0 1000 120" aria-hidden="true">
+            <defs>
+              <linearGradient id="gr" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#f97316"/>
+                <stop offset="50%" stopColor="#fb923c"/>
+                <stop offset="100%" stopColor="#f59e0b"/>
+              </linearGradient>
+            </defs>
+            <path
+              id="lp"
+              ref={pathRef}
+              d="M0 60 C120 0 220 120 360 60 S600 0 720 60 S920 110 1000 50"
+              fill="none"
+              stroke="url(#gr)"
+              strokeWidth="4"
+              strokeLinecap="round"
+            />
+          </svg>
+
+          <div className="stats">
+            <div>
+              <strong className="gt" data-n="3">0</strong>
+              <span>Engineering roles held</span>
+            </div>
+            <div>
+              <strong className="gt" data-n="2">0</strong>
+              <span>Systems live in active production</span>
+            </div>
+            <div>
+              <strong className="gt" data-n="15">0</strong>
+              <span>Core technologies in my stack</span>
+            </div>
+            <div>
+              <strong className="gt" data-n="100">0</strong>
+              <span>Cryptographic log integrity</span>
+            </div>
+          </div>
+
+          <div className="achv">
+            <div className="achv-item">
+              <strong>Enterprise ERP:</strong> Contributing to accounting software integrated with <strong>Osquare ERP</strong>, actively used by Aptech Pakistan.
+            </div>
+            <div className="achv-item">
+              <strong>Live Deployment:</strong> Successfully deployed the <strong>iBusiness application</strong>, running in active production for the client.
+            </div>
+            <div className="achv-item">
+              <strong>Secure SDLC:</strong> Built banking-focused enterprise solutions through SecureFlow implementing cryptographic hash-chain audits and RBAC.
+            </div>
+            <div className="achv-item">
+              <strong>Production Dashboards:</strong> Developed reporting engines, CSV export utilities, and administrative portals across all projects.
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ==========================================================================
+       12. CONTACT SECTION (Clip wipe text, Magnetic button, Confetti burst)
+       ========================================================================== */
+    function Contact() {
+      const mRef = useRef(null);
+
+      useEffect(() => {
+        if (!window.gsap || !window.ScrollTrigger) return;
+
+        gsap.to('.big', {
+          clipPath: 'inset(0 0% 0 0)',
+          duration: 1.4,
+          ease: 'power3.inOut',
+          scrollTrigger: {
+            trigger: '.contact',
+            start: 'top 60%'
+          }
+        });
+
+        // Magnetic button
+        const m = mRef.current;
+        if (!m) return;
+
+        const handleMouseMove = (e) => {
+          const r = m.getBoundingClientRect();
+          gsap.to(m, {
+            x: (e.clientX - r.left - r.width / 2) * 0.3,
+            y: (e.clientY - r.top - r.height / 2) * 0.3,
+            duration: 0.3
+          });
+        };
+
+        const handleMouseLeave = () => {
+          gsap.to(m, {
+            x: 0,
+            y: 0,
+            duration: 0.8,
+            ease: 'elastic.out(1, .4)'
+          });
+        };
+
+        m.addEventListener('mousemove', handleMouseMove);
+        m.addEventListener('mouseleave', handleMouseLeave);
+
+        return () => {
+          m.removeEventListener('mousemove', handleMouseMove);
+          m.removeEventListener('mouseleave', handleMouseLeave);
+        };
+      }, []);
+
+      // 32-particle explosion on button click
+      const handleClick = (e) => {
+        for (let i = 0; i < 32; i++) {
+          const d = document.createElement('b');
+          d.className = 'pt';
+          d.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;background:${ORANGE_PALETTE[i % ORANGE_PALETTE.length]}`;
+          document.body.appendChild(d);
+        }
+
+        anime({
+          targets: '.pt',
+          translateX: () => anime.random(-200, 200),
+          translateY: () => anime.random(-200, 200),
+          scale: [1, 0],
+          rotate: () => anime.random(-360, 360),
+          duration: 1100,
+          easing: 'easeOutExpo',
+          complete: () => {
+            document.querySelectorAll('.pt').forEach(n => n.remove());
+          }
+        });
+      };
+
+      return (
+        <section className="contact" id="contact">
+          <div className="big gt">Let's build something that moves.</div>
+
+          <div className="contact-actions">
+            <a
+              className="m"
+              ref={mRef}
+              href="mailto:sahilkhiyatani25@gmail.com"
+              onClick={handleClick}
+            >
+              <span>sahilkhiyatani25@gmail.com</span>
+            </a>
+
+            <a
+              className="resume-dl"
+              href="Sahil_Resume.pdf"
+              download="Sahil_Resume.pdf"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Download CV</span>
+            </a>
+          </div>
+
+          <div className="links">
+            <a href="tel:03033460806" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              📞 <span>03033460806</span>
+            </a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+        </section>
+      );
+    }
+
+    /* ==========================================================================
+       13. MAIN ROOT APP COMPONENT
+       ========================================================================== */
+    function App() {
+      const [isReady, setIsReady] = useState(false);
+      const [theme, setTheme] = useState('dark');
+
+      const toggleTheme = () => {
+        const nextTheme = theme === 'dark' ? 'light' : 'dark';
+        setTheme(nextTheme);
+        document.documentElement.setAttribute('data-theme', nextTheme);
+      };
+
+      // Global Scroll Setup: Reading bar & 3D tilt
+      useEffect(() => {
+        if (!window.gsap || !window.ScrollTrigger) return;
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Scroll reading bar
+        gsap.to('#bar', {
+          scaleX: 1,
+          ease: 'none',
+          scrollTrigger: {
+            start: 0,
+            end: 'max',
+            scrub: true
+          }
+        });
+
+        // Hero parallax
+        gsap.to('#name', {
+          xPercent: -10,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+
+        // 3D Tilt on cards
+        const handleTiltMove = function (e) {
+          const r = this.getBoundingClientRect();
+          gsap.to(this, {
+            rotateY: ((e.clientX - r.left) / r.width - 0.5) * 8,
+            rotateX: -((e.clientY - r.top) / r.height - 0.5) * 8,
+            transformPerspective: 900,
+            duration: 0.4
+          });
+        };
+
+        const handleTiltLeave = function () {
+          gsap.to(this, { rotateX: 0, rotateY: 0, duration: 0.7 });
+        };
+
+        const tiltElements = document.querySelectorAll('.tilt');
+        tiltElements.forEach(el => {
+          el.addEventListener('mousemove', handleTiltMove);
+          el.addEventListener('mouseleave', handleTiltLeave);
+        });
+
+        return () => {
+          tiltElements.forEach(el => {
+            el.removeEventListener('mousemove', handleTiltMove);
+            el.removeEventListener('mouseleave', handleTiltLeave);
+          });
+        };
+      }, [isReady]);
+
+      return (
+        <React.Fragment>
+          <Preloader onComplete={() => setIsReady(true)} />
+          <CustomCursor />
+          <div id="bar"></div>
+          <Navbar theme={theme} toggleTheme={toggleTheme} />
+          <Hero isReady={isReady} />
+          <Ticker />
+          <About />
+          <Experience />
+          <Projects />
+          <Education />
+          <Skills />
+          <Impact />
+          <Contact />
+          <footer>
+            <div>Sahil • Karachi, Pakistan. Full Stack MERN Developer.</div>
+            <div>Clean, High-Contrast Tech Theme. Click dots for ripple effect.</div>
+          </footer>
+        </React.Fragment>
+      );
+    }
+
+    // Mount React App
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
